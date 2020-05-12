@@ -1,11 +1,14 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
 
 const evtNames = [
+  'ready',
   'click',
   'dblclick',
+  'dragstart',
+  'drag',
   'dragend',
   'mousedown',
   'mouseout',
@@ -86,6 +89,7 @@ export class Marker extends React.Component {
     evtNames.forEach(e => {
       this.marker.addListener(e, this.handleEvent(e));
     });
+    google.maps.event.trigger(this.marker, 'ready');
 
     this.markerPromise.resolve(this.marker);
   }
@@ -110,7 +114,13 @@ export class Marker extends React.Component {
 
 Marker.propTypes = {
   position: PropTypes.object,
-  map: PropTypes.object
+  map: PropTypes.object,
+  google: PropTypes.object,
+  mapCenter: PropTypes.object,
+  icon: PropTypes.object,
+  label: PropTypes.any,
+  draggable: PropTypes.bool,
+  title: PropTypes.any
 }
 
 evtNames.forEach(e => Marker.propTypes[e] = PropTypes.func)

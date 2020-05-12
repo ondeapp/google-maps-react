@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 
 export class InfoWindow extends React.Component {
@@ -109,6 +108,8 @@ InfoWindow.propTypes = {
   marker: PropTypes.object,
   position: PropTypes.object,
   visible: PropTypes.bool,
+  google: PropTypes.object,
+  mapCenter: PropTypes.object,
 
   // callbacks
   onClose: PropTypes.func,

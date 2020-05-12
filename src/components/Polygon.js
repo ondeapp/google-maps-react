@@ -103,7 +103,9 @@ Polygon.propTypes = {
   strokeOpacity: PropTypes.number,
   strokeWeight: PropTypes.number,
   fillColor: PropTypes.string,
-  fillOpacity: PropTypes.number
+  fillOpacity: PropTypes.number,
+  google: PropTypes.object,
+  map: PropTypes.object
 }
 
 evtNames.forEach(e => Polygon.propTypes[e] = PropTypes.func)

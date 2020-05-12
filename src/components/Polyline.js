@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { arePathsEqual } from '../lib/arePathsEqual';
 import { camelize } from '../lib/String';
-const evtNames = ['click', 'mouseout', 'mouseover'];
+const evtNames = ['click', 'mouseout', 'mouseover', 'ready'];
 
 const wrappedPromise = function() {
     var wrappedPromise = {},
@@ -73,6 +73,8 @@ export class Polyline extends React.Component {
       this.polyline.addListener(e, this.handleEvent(e));
     });
 
+    google.maps.event.trigger(this.polyline, 'ready');
+
     this.polylinePromise.resolve(this.polyline);
   }
 
@@ -98,7 +100,9 @@ Polyline.propTypes = {
   path: PropTypes.array,
   strokeColor: PropTypes.string,
   strokeOpacity: PropTypes.number,
-  strokeWeight: PropTypes.number
+  strokeWeight: PropTypes.number,
+  google: PropTypes.object,
+  map: PropTypes.object
 }
 
 evtNames.forEach(e => Polyline.propTypes[e] = PropTypes.func)

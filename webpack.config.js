@@ -22,29 +22,11 @@ const getConfig = require('hjs-webpack')
 
 var config = getConfig({
   isDev,
-  in: join(examples, 'index.js'),
-  out: dest,
+  in: join(src, 'index.js'),
+  out: 'public',
   clearBeforeBuild: true,
-  html: function(context, cb) {
-    context.publicPath = isDev ? 'http://localhost:3000/' : ''
+  html: false
 
-    fs.readFile(join(root, 'README.md'), (err, data) => {
-      if (err) {
-        return cb(err);
-      }
-      cb(null, {
-        'index.html': context.defaultTemplate(),
-        // 'readme.html': context.defaultTemplate({
-        //   html: `<div id="readme">
-        //           ${marked(data.toString('utf-8'))}
-        //         </div>`,
-        //   metaTags: {
-        //     bootApp: false
-        //   }
-        // })
-      })
-    })
-  }
 });
 
 const dotenv      = require('dotenv');
